@@ -1,29 +1,60 @@
-//
-//  HomeViewController.swift
-//  TopTwenty
-//
-//  Created by Eduardo Antonio Baez Gonzalez on 28-03-22.
-//
-
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    var navStyle: NavigationStyleHelper!
+    //let searchController = UISearchController(searchResultsController: SearchResultsViewController())
+    let searchController = UISearchController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setup()
+        style()
+        layout()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+// MARK: - Methods
+extension HomeViewController {
+    func setup() {
+        title = "Inicio"
+        
+        NavigationStyleHelper(navigationController: navigationController!).setNavigationBarStyle()
+        
+        searchController.searchResultsUpdater = self
+        searchController.showsSearchResultsController = true
+    }
+    
+    func style() {
+        // View
+        view.backgroundColor = UIColor(named: "background")
+        
+        // SearchController
+        searchController.searchBar.tintColor = .black
+        searchController.searchBar.searchTextField.layer.cornerRadius = 18
+        searchController.searchBar.searchTextField.layer.masksToBounds = true
+        searchController.searchBar.searchTextField.backgroundColor = .white
+    }
+    
+    func layout() {
+        // SearchController
+        searchController.searchBar.placeholder = "Buscar en Mercado Libre"
+        searchController.searchBar.setValue("Cancelar", forKey: "cancelButtonText")
+        navigationItem.searchController = searchController
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+extension HomeViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let search = searchController.searchBar.text else { return }
+        print("search: \(search)")
+    }
+}
+
+// MARK: - SearchResultsDelegate
+/*extension HomeViewController: SearchResultsDelegate {
+    func goToProductResults() {
+        print("Gooo!!!!")
+        navigationController?.pushViewController(ProductResultsViewController(), animated: true)
+    }
+}*/
