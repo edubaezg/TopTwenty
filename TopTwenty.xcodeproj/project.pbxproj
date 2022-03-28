@@ -17,6 +17,9 @@
 		B71034EE27F237BF00136989 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71034EC27F237BF00136989 /* HomeViewController.xib */; };
 		B71034F127F237D600136989 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71034EF27F237D600136989 /* FavoritesViewController.swift */; };
 		B71034F227F237D600136989 /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71034F027F237D600136989 /* FavoritesViewController.xib */; };
+		B71034FC27F23F9000136989 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71034FA27F23F9000136989 /* SearchResultsViewController.swift */; };
+		B710350027F23FB500136989 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71034FE27F23FB500136989 /* SearchResultTableViewCell.swift */; };
+		B710350127F23FB500136989 /* SearchResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B71034FF27F23FB500136989 /* SearchResultTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		B71034EC27F237BF00136989 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		B71034EF27F237D600136989 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		B71034F027F237D600136989 /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
+		B71034FA27F23F9000136989 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		B71034FE27F23FB500136989 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		B71034FF27F23FB500136989 /* SearchResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,7 @@
 			children = (
 				B71034E927F2379100136989 /* Home */,
 				B71034EA27F2379700136989 /* Favorites */,
+				B71034F627F23F6F00136989 /* SearchResults */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -112,8 +119,9 @@
 		B71034E927F2379100136989 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B71034EB27F237BF00136989 /* HomeViewController.swift */,
-				B71034EC27F237BF00136989 /* HomeViewController.xib */,
+				B71034F527F23D4100136989 /* Model */,
+				B71034F427F23D3C00136989 /* View */,
+				B71034F327F23D3600136989 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -125,6 +133,63 @@
 				B71034F027F237D600136989 /* FavoritesViewController.xib */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		B71034F327F23D3600136989 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B71034F427F23D3C00136989 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B71034EB27F237BF00136989 /* HomeViewController.swift */,
+				B71034EC27F237BF00136989 /* HomeViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B71034F527F23D4100136989 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B71034F627F23F6F00136989 /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+				B71034F927F23F8000136989 /* Model */,
+				B71034F827F23F7C00136989 /* View */,
+				B71034F727F23F7600136989 /* ViewModel */,
+			);
+			path = SearchResults;
+			sourceTree = "<group>";
+		};
+		B71034F727F23F7600136989 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B71034F827F23F7C00136989 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B71034FA27F23F9000136989 /* SearchResultsViewController.swift */,
+				B71034FE27F23FB500136989 /* SearchResultTableViewCell.swift */,
+				B71034FF27F23FB500136989 /* SearchResultTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B71034F927F23F8000136989 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B710350127F23FB500136989 /* SearchResultTableViewCell.xib in Resources */,
 				B71034DA27F2315200136989 /* LaunchScreen.storyboard in Resources */,
 				B71034D727F2315200136989 /* Assets.xcassets in Resources */,
 				B71034F227F237D600136989 /* FavoritesViewController.xib in Resources */,
@@ -201,9 +267,11 @@
 			files = (
 				B71034ED27F237BF00136989 /* HomeViewController.swift in Sources */,
 				B71034E427F2373900136989 /* MainTabBarViewController.swift in Sources */,
+				B710350027F23FB500136989 /* SearchResultTableViewCell.swift in Sources */,
 				B71034E727F2376300136989 /* NavigationStyleHelper.swift in Sources */,
 				B71034CE27F2315100136989 /* AppDelegate.swift in Sources */,
 				B71034F127F237D600136989 /* FavoritesViewController.swift in Sources */,
+				B71034FC27F23F9000136989 /* SearchResultsViewController.swift in Sources */,
 				B71034D027F2315100136989 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

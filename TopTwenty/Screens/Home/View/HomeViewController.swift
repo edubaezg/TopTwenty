@@ -2,8 +2,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     var navStyle: NavigationStyleHelper!
-    //let searchController = UISearchController(searchResultsController: SearchResultsViewController())
-    let searchController = UISearchController()
+    let searchController = UISearchController(searchResultsController: SearchResultsViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
