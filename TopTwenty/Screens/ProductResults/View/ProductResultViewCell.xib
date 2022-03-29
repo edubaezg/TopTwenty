@@ -41,6 +41,9 @@
                                                         <buttonConfiguration key="configuration" style="plain">
                                                             <imageReference key="image" image="heart" catalog="system" symbolScale="small"/>
                                                         </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="toggleFavoriteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="g98-8C-TpR"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" name="white"/>
@@ -126,6 +129,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="1gV-Cb-uri" id="0cZ-2H-BP9"/>
                 <outlet property="favoriteBackgroundView" destination="g8b-Hl-bOw" id="Itc-M6-Oef"/>
+                <outlet property="favoriteButton" destination="pvg-ea-PWV" id="yMv-e9-p91"/>
                 <outlet property="nameLabel" destination="tGi-Y3-mNN" id="ddw-4D-fMc"/>
                 <outlet property="priceLabel" destination="Zes-e9-n2f" id="ajv-Ou-0qe"/>
                 <outlet property="productStackView" destination="7fT-ph-D1u" id="Tw1-5W-r5d"/>

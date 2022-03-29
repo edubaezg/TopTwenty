@@ -57,4 +57,8 @@ extension ProductResultsViewController: UITableViewDelegate, UITableViewDataSour
         cell.setup(name: "Nintendo Switch OLED 64GB Standard color blanco y negro", price: "$ 418.990", description: "Vendido por Nintendo")
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("TAPPED...")
+    }
 }
