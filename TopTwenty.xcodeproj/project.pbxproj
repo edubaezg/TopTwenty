@@ -23,6 +23,8 @@
 		B710350827F24A3000136989 /* ProductResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B710350627F24A3000136989 /* ProductResultsViewController.swift */; };
 		B710351127F35FE600136989 /* ProductResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B710350F27F35FE600136989 /* ProductResultViewCell.swift */; };
 		B710351327F3611700136989 /* ProductResultViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B710351027F35FE600136989 /* ProductResultViewCell.xib */; };
+		B710351A27F3B48000136989 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B710351827F3B48000136989 /* ProductDetailViewController.swift */; };
+		B710351B27F3B48000136989 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B710351927F3B48000136989 /* ProductDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		B710350627F24A3000136989 /* ProductResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductResultsViewController.swift; sourceTree = "<group>"; };
 		B710350F27F35FE600136989 /* ProductResultViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductResultViewCell.swift; sourceTree = "<group>"; };
 		B710351027F35FE600136989 /* ProductResultViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductResultViewCell.xib; sourceTree = "<group>"; };
+		B710351827F3B48000136989 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		B710351927F3B48000136989 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 			children = (
 				B71034E927F2379100136989 /* Home */,
 				B71034EA27F2379700136989 /* Favorites */,
+				B710351427F3B43100136989 /* ProductDetail */,
 				B710350227F249F700136989 /* ProductResults */,
 				B71034F627F23F6F00136989 /* SearchResults */,
 			);
@@ -233,6 +238,39 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B710351427F3B43100136989 /* ProductDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B710351727F3B46800136989 /* Model */,
+				B710351627F3B46400136989 /* View */,
+				B710351527F3B45F00136989 /* ViewModel */,
+			);
+			path = ProductDetail;
+			sourceTree = "<group>";
+		};
+		B710351527F3B45F00136989 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B710351627F3B46400136989 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B710351827F3B48000136989 /* ProductDetailViewController.swift */,
+				B710351927F3B48000136989 /* ProductDetailViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B710351727F3B46800136989 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -294,6 +332,7 @@
 				B710350127F23FB500136989 /* SearchResultViewCell.xib in Resources */,
 				B71034DA27F2315200136989 /* LaunchScreen.storyboard in Resources */,
 				B71034D727F2315200136989 /* Assets.xcassets in Resources */,
+				B710351B27F3B48000136989 /* ProductDetailViewController.xib in Resources */,
 				B71034F227F237D600136989 /* FavoritesViewController.xib in Resources */,
 				B710351327F3611700136989 /* ProductResultViewCell.xib in Resources */,
 				B71034EE27F237BF00136989 /* HomeViewController.xib in Resources */,
@@ -314,6 +353,7 @@
 				B71034E727F2376300136989 /* NavigationStyleHelper.swift in Sources */,
 				B71034CE27F2315100136989 /* AppDelegate.swift in Sources */,
 				B71034F127F237D600136989 /* FavoritesViewController.swift in Sources */,
+				B710351A27F3B48000136989 /* ProductDetailViewController.swift in Sources */,
 				B71034FC27F23F9000136989 /* SearchResultsViewController.swift in Sources */,
 				B710351127F35FE600136989 /* ProductResultViewCell.swift in Sources */,
 				B71034D027F2315100136989 /* SceneDelegate.swift in Sources */,
