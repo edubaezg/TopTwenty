@@ -1,16 +1,16 @@
 import UIKit
 
-/*protocol SearchResultsDelegate: AnyObject {
+protocol SearchResultsDelegate: AnyObject {
     func goToProductResults()
-}*/
+}
 
 class SearchResultsViewController: UIViewController {
 
     let searchResultsTableView = UITableView()
 
-    //weak var delegate: SearchResultsDelegate?
+    weak var delegate: SearchResultsDelegate?
     
-    let searchResultCellIdentifier = "SearchResultTableViewCell"
+    let cellIdentifier = "SearchResultViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +26,12 @@ extension SearchResultsViewController {
     func setup() {
         searchResultsTableView.delegate = self
         searchResultsTableView.dataSource = self
-        searchResultsTableView.register(UINib(nibName: searchResultCellIdentifier, bundle: .main), forCellReuseIdentifier: searchResultCellIdentifier)
+        searchResultsTableView.register(UINib(nibName: cellIdentifier, bundle: .main), forCellReuseIdentifier: cellIdentifier)
     }
     
     func style() {
         searchResultsTableView.translatesAutoresizingMaskIntoConstraints = false
+        searchResultsTableView.separatorStyle = .none
     }
     
     func layout() {
@@ -52,7 +53,7 @@ extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: searchResultCellIdentifier) as? SearchResultTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? SearchResultViewCell else {
             return UITableViewCell()
         }
         
@@ -60,7 +61,6 @@ extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt")
-        //delegate?.goToProductResults()
+        delegate?.goToProductResults()
     }
 }

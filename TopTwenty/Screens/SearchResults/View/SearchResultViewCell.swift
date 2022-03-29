@@ -1,6 +1,6 @@
 import UIKit
 
-class SearchResultTableViewCell: UITableViewCell {
+class SearchResultViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
