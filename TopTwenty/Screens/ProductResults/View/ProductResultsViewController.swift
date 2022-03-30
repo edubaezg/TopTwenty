@@ -4,7 +4,6 @@ class ProductResultsViewController: UIViewController {
 
     let cellIdentifier = "ProductResultViewCell"
     let productsTableView = UITableView()
-    var navStyle: NavigationStyleHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,9 +16,7 @@ class ProductResultsViewController: UIViewController {
 // MARK: - Methods
 extension ProductResultsViewController {
     func setup() {
-        title = "Resultados"
-        
-        NavigationStyleHelper(navigationController: navigationController!).setNavigationBarStyle()
+        title = "Top 20"
         
         productsTableView.delegate = self
         productsTableView.dataSource = self
@@ -59,6 +56,6 @@ extension ProductResultsViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("TAPPED...")
+        navigationController?.pushViewController(ProductDetailViewController(), animated: true)
     }
 }

@@ -1,9 +1,11 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var navStyle: NavigationStyleHelper!
     let searchResultsVC = SearchResultsViewController()
-    //let searchController = UISearchController(searchResultsController: SearchResultsViewController())
     var searchController: UISearchController?
     
     override func viewDidLoad() {
@@ -18,7 +20,7 @@ class HomeViewController: UIViewController {
 // MARK: - Methods
 extension HomeViewController {
     func setup() {
-        title = "Inicio"
+        
         
         NavigationStyleHelper(navigationController: navigationController!).setNavigationBarStyle()
         
@@ -43,7 +45,12 @@ extension HomeViewController {
         // SearchController
         searchController?.searchBar.placeholder = "Buscar en Mercado Libre"
         searchController?.searchBar.setValue("Cancelar", forKey: "cancelButtonText")
-        navigationItem.searchController = searchController
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.title = "Inicio"
+            self.navigationItem.searchController = self.searchController
+            self.activityIndicator.stopAnimating()
+        }
     }
 }
 

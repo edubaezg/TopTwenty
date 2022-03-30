@@ -5,12 +5,10 @@ protocol SearchResultsDelegate: AnyObject {
 }
 
 class SearchResultsViewController: UIViewController {
-
-    let searchResultsTableView = UITableView()
-
-    weak var delegate: SearchResultsDelegate?
     
     let cellIdentifier = "SearchResultViewCell"
+    let searchResultsTableView = UITableView()
+    weak var delegate: SearchResultsDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
