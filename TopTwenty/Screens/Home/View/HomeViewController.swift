@@ -4,30 +4,33 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var navStyle: NavigationStyleHelper!
+    let homeViewModel = HomeViewModel()
     let searchResultsVC = SearchResultsViewController()
     var searchController: UISearchController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController = UISearchController(searchResultsController: searchResultsVC)
         setup()
         style()
         layout()
     }
 }
 
-// MARK: - Methods
+// MARK: - Initial Methods
 extension HomeViewController {
     func setup() {
-        
-        
         NavigationStyleHelper(navigationController: navigationController!).setNavigationBarStyle()
         
-        searchController?.searchResultsUpdater = self
+        searchController = UISearchController(searchResultsController: searchResultsVC)
         searchController?.showsSearchResultsController = true
-        
+        searchController?.searchBar.delegate = searchResultsVC.self
+
         searchResultsVC.delegate = self
+        
+        //getAccessToken()
+        self.title = "Inicio"
+        
+        self.navigationItem.searchController = self.searchController
     }
     
     func style() {
@@ -45,27 +48,32 @@ extension HomeViewController {
         // SearchController
         searchController?.searchBar.placeholder = "Buscar en Mercado Libre"
         searchController?.searchBar.setValue("Cancelar", forKey: "cancelButtonText")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.title = "Inicio"
-            self.navigationItem.searchController = self.searchController
-            self.activityIndicator.stopAnimating()
-        }
     }
 }
 
-// MARK: - UISearchResultsUpdating
-extension HomeViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let search = searchController.searchBar.text else { return }
-        // TODO: Search Api
-        print(search)
+// MARK: - Methods
+extension HomeViewController {
+    func getAccessToken() {
+        homeViewModel.getAccessToken { didTokenSaved in
+            if !didTokenSaved {
+                // TODO: SHOW ERROR
+                print("TODO: SHOW ERROR")
+                self.activityIndicator.stopAnimating()
+                self.title = "Inicio"
+                
+                self.navigationItem.searchController = self.searchController
+            } else {
+                self.activityIndicator.stopAnimating()
+                self.title = "Inicio"
+                self.navigationItem.searchController = self.searchController
+            }
+        }
     }
 }
 
 // MARK: - SearchResultsDelegate
 extension HomeViewController: SearchResultsDelegate {
-    func goToProductResults() {
-        navigationController?.pushViewController(ProductResultsViewController(), animated: true)
+    func goToProductResults(category: CategoryModel) {
+        navigationController?.pushViewController(ProductResultsViewController(categoryId: category.category_id), animated: true)
     }
 }

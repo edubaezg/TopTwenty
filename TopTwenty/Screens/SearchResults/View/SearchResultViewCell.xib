@@ -28,7 +28,7 @@
                                     <constraint firstAttribute="height" constant="20" id="xfP-sG-pRK"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pokemon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpq-Hg-Dpl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpq-Hg-Dpl">
                                 <rect key="frame" x="40" y="1.5" width="200" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="92A-FN-YEb"/>
@@ -56,6 +56,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="nameLabel" destination="Xpq-Hg-Dpl" id="ETx-aU-3f5"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="84.375"/>
         </tableViewCell>
     </objects>

@@ -1,13 +1,15 @@
 import UIKit
 
 protocol SearchResultsDelegate: AnyObject {
-    func goToProductResults()
+    func goToProductResults(category: CategoryModel)
 }
 
 class SearchResultsViewController: UIViewController {
     
     let cellIdentifier = "SearchResultViewCell"
     let searchResultsTableView = UITableView()
+    let searchResultsViewModel = SearchResultsViewModel()
+    var categories = [CategoryModel]()
     weak var delegate: SearchResultsDelegate?
     
     override func viewDidLoad() {
@@ -16,7 +18,6 @@ class SearchResultsViewController: UIViewController {
         style()
         layout()
     }
-    
 }
 
 // MARK: - Methods
@@ -47,18 +48,29 @@ extension SearchResultsViewController {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        6
+        categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? SearchResultViewCell else {
             return UITableViewCell()
         }
-        
+        cell.setup(category: categories[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.goToProductResults()
+        delegate?.goToProductResults(category: categories[indexPath.row])
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension SearchResultsViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let search = searchBar.text else { return }
+        searchResultsViewModel.getCategoryPreditor(search: search) { categories in
+            self.categories = categories
+            self.searchResultsTableView.reloadData()
+        }
     }
 }

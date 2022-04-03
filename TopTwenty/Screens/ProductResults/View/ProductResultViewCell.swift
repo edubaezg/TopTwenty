@@ -6,14 +6,15 @@ class ProductResultViewCell: UITableViewCell {
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var favoriteBackgroundView: UIView!
     @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    func setup(name: String, price: String, description: String) {
-        nameLabel.text = name
+    func setup(title: String, price: String, description: String, thumbnail: String) {
+        titleLabel.text = title
         priceLabel.text = price
         descriptionLabel.text = description
+        thumbnailImageView.loadFrom(URLAddress: thumbnail)
         
         style()
     }

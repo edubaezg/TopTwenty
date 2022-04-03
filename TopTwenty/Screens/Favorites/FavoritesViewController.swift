@@ -1,8 +1,6 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-
-    var navStyle: NavigationStyleHelper!
     
     override func viewDidLoad() {
         super.viewDidLoad()
