@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  TopTwenty
-//
-//  Created by Eduardo Antonio Baez Gonzalez on 28-03-22.
-//
-
 import UIKit
 
 @main
