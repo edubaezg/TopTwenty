@@ -1,6 +1,7 @@
 import UIKit
 
 extension UIImageView {
+    // Load a image by an url
     func loadFrom(URLAddress: String) {
         guard let url = URL(string: URLAddress) else {
             return

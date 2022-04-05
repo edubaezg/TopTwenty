@@ -1,49 +1,70 @@
 import Foundation
 import Alamofire
 
+// MARK: - ProductResultService
 class ProductResultService {
+    // MARK: - Properties
+    static let basePath = Paths.basePath.rawValue
+    
+    // Get top 20 products by category
     static func getTopTwenty(withCategoryId categoryId: String, completion: @escaping (Result<[Product], Error>) -> Void) {
-        AF.request("https://api.mercadolibre.com/highlights/MLM/category/\(categoryId)", encoding: URLEncoding.default, headers: getHeaders()).response {
+        let url = "\(basePath)\(Paths.topTwenty.rawValue)\(categoryId)"
+        AF.request(url, encoding: URLEncoding.default, headers: getHeaders()).response {
             response in
             guard let data = response.data else { return }
             do {
                 let topTwentyResponse = try JSONDecoder().decode(TopTwentyResponse.self, from: data)
-                getMultiGet(withItems: topTwentyResponse.topTwentyItems, completion: completion)
+                let productIds = topTwentyResponse.topTwentyItems.map { $0.id }
+                let productIdsString = getProductIds(products: productIds)
+                getMultiGet(withItems: productIdsString, completion: completion)
             } catch {
-                print("Error getTopTwenty")
+                print("Error getTopTwenty: \(error.localizedDescription)")
             }
         }
     }
     
-    private static func getMultiGet(withItems topTwentyItems: [TopTwentyItem], completion: @escaping (Result<[Product], Error>) -> Void) {
-        AF.request("https://api.mercadolibre.com/items", parameters: getParameters(topTwentyItems: topTwentyItems), encoding: URLEncoding.default, headers: getHeaders()).response {
+    // Get product detail by multiple product ids
+    static func getMultiGet(withItems productsIds: String, completion: @escaping (Result<[Product], Error>) -> Void) {
+        let url = "\(basePath)\(Paths.multiget.rawValue)"
+        AF.request(url, parameters: getParameters(productsIds: productsIds), encoding: URLEncoding.default, headers: getHeaders()).response {
             response in
             guard let data = response.data else { return }
             do {
                 let multiGetResponse = try JSONDecoder().decode([MultiGetResponse].self, from: data)
-                let products = multiGetResponse.map { response in response.body }
-                completion(.success(products))
+                var products = multiGetResponse.map { response in response.body }
+                setProductFavorites(products: &products, completion: completion)
             } catch {
-                print("Error getMultiGet")
+                print("Error getMultiGet: \(error.localizedDescription)")
             }
         }
     }
     
     private static func getHeaders() -> HTTPHeaders {
-        ["Authorization": "Bearer APP_USR-917558775959455-040318-c7e294745e9ae1dfb3048b0437f4268a-9754121"]
+        guard let token = HomePersistance.getToken() else { return HTTPHeaders() }
+        return ["Authorization": "Bearer \(token)"]
     }
     
-    private static func getParameters(topTwentyItems: [TopTwentyItem]) -> Parameters {
-        var contentIds = ""
-        
-        topTwentyItems.forEach { item in
-            contentIds.append(item.id + ",")
+    private static func getParameters(productsIds: String) -> Parameters {
+        ["ids": productsIds]
+    }
+    
+    // Get a string of ids by an array of strings
+    static func getProductIds(products: [String]) -> String {
+        var productIds = ""
+        products.forEach { item in productIds.append(item + ",") }
+        return productIds
+    }
+    
+    // Set product like favorite if is in memory and return products updated to view model
+    private static func setProductFavorites(products: inout [Product], completion: @escaping (Result<[Product], Error>) -> Void) {
+        for index in 0..<products.count {
+            FavoritesPersistance.getFavorites { productIds in
+                let favoriteProducts = productIds.filter { id in id == products[index].id }
+                products[index].isFavorite = favoriteProducts.count > 0
+            }
         }
         
-        print(contentIds)
-        
-        let params = [ "ids": contentIds ]
-        
-        return params
+        completion(.success(products))
     }
+    
 }

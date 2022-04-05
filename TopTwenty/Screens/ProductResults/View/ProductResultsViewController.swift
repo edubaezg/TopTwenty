@@ -1,7 +1,8 @@
 import UIKit
 
+// MARK: - ProductResultsViewController
 class ProductResultsViewController: UIViewController {
-
+    // MARK: - Properties
     let activityIndicatorView = UIActivityIndicatorView()
     let cellIdentifier = "ProductResultViewCell"
     let productsTableView = UITableView()
@@ -10,6 +11,7 @@ class ProductResultsViewController: UIViewController {
     var products = [Product]()
     
     
+    // MARK: - Inits
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -33,11 +35,12 @@ extension ProductResultsViewController {
     func setup() {
         title = "Top 20"
         
+        // ProductsTableView
         productsTableView.delegate = self
         productsTableView.dataSource = self
         productsTableView.register(UINib(nibName: cellIdentifier, bundle: .main), forCellReuseIdentifier: cellIdentifier)
         
-        productsTableView.isHidden = true
+        // ActivityIndicatorView
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.startAnimating()
         
@@ -47,10 +50,13 @@ extension ProductResultsViewController {
     func style() {
         view.backgroundColor = UIColor(named: "background")
         
+        // ProductsTableView
         productsTableView.translatesAutoresizingMaskIntoConstraints = false
         productsTableView.separatorStyle = .none
         productsTableView.focusEffect = .none
+        productsTableView.isHidden = true
         
+        // ActivityIndicatorView
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -82,7 +88,6 @@ extension ProductResultsViewController {
             self.productsTableView.reloadData()
             self.productsTableView.isHidden = false
             self.activityIndicatorView.stopAnimating()
-            
         }
     }
 }
@@ -96,12 +101,34 @@ extension ProductResultsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ProductResultViewCell else { return UITableViewCell() }
         let product = products[indexPath.row]
-        print(product.thumbnail)
-        cell.setup(title: product.title, price: "$ \(product.price)", description: "Vendido por Nintendo", thumbnail: product.thumbnail)
+        
+        cell.delegate = self
+        cell.setup(product: product)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(ProductDetailViewController(product: products[indexPath.row]), animated: true)
+        let productDetailVC = ProductDetailViewController(product: products[indexPath.row])
+        navigationController?.pushViewController(productDetailVC, animated: true)
+    }
+}
+
+// MARK: - ProductResultDelegate
+extension ProductResultsViewController: ProductResultDelegate {
+    func addFavorite(productId: String) {
+        for index in 0..<products.count {
+            if products[index].id == productId { products[index].isFavorite = true }
+        }
+        
+        productResultsViewModel.addFavorite(productId: productId)
+    }
+    
+    func deleteFavorite(productId: String) {
+        for index in 0..<products.count {
+            if products[index].id == productId { products[index].isFavorite = false }
+        }
+        
+        productResultsViewModel.deleteFavorite(productId: productId)
     }
 }

@@ -1,11 +1,12 @@
 import UIKit
 
+// MARK: - HomeViewController
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    // MARK: - Properties
     let homeViewModel = HomeViewModel()
     let searchResultsVC = SearchResultsViewController()
+    let activityIndicatorView = UIActivityIndicatorView()
     var searchController: UISearchController?
     
     override func viewDidLoad() {
@@ -20,22 +21,19 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     func setup() {
         NavigationStyleHelper(navigationController: navigationController!).setNavigationBarStyle()
-        
         searchController = UISearchController(searchResultsController: searchResultsVC)
-        searchController?.showsSearchResultsController = true
-        searchController?.searchBar.delegate = searchResultsVC.self
-
+        setSearchControllerView()
+        activityIndicatorView.startAnimating()
         searchResultsVC.delegate = self
-        
-        //getAccessToken()
-        self.title = "Inicio"
-        
-        self.navigationItem.searchController = self.searchController
+        getAccessToken()
     }
     
     func style() {
         // View
         view.backgroundColor = UIColor(named: "background")
+        
+        // ActivityIndicator
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         // SearchController
         searchController?.searchBar.tintColor = .black
@@ -45,25 +43,32 @@ extension HomeViewController {
     }
     
     func layout() {
-        // SearchController
-        searchController?.searchBar.placeholder = "Buscar en Mercado Libre"
-        searchController?.searchBar.setValue("Cancelar", forKey: "cancelButtonText")
+        view.addSubview(activityIndicatorView)
+        
+        NSLayoutConstraint.activate([
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
 }
 
 // MARK: - Methods
 extension HomeViewController {
+    func setSearchControllerView() {
+        searchController?.showsSearchResultsController = true
+        searchController?.searchBar.delegate = searchResultsVC.self
+        searchController?.searchBar.placeholder = "Buscar en Mercado Libre"
+        searchController?.searchBar.setValue("Cancelar", forKey: "cancelButtonText")
+    }
+    
     func getAccessToken() {
         homeViewModel.getAccessToken { didTokenSaved in
             if !didTokenSaved {
-                // TODO: SHOW ERROR
-                print("TODO: SHOW ERROR")
-                self.activityIndicator.stopAnimating()
+                // TODO: Show home error
+                self.activityIndicatorView.stopAnimating()
                 self.title = "Inicio"
-                
-                self.navigationItem.searchController = self.searchController
             } else {
-                self.activityIndicator.stopAnimating()
+                self.activityIndicatorView.stopAnimating()
                 self.title = "Inicio"
                 self.navigationItem.searchController = self.searchController
             }
@@ -74,6 +79,7 @@ extension HomeViewController {
 // MARK: - SearchResultsDelegate
 extension HomeViewController: SearchResultsDelegate {
     func goToProductResults(category: CategoryModel) {
-        navigationController?.pushViewController(ProductResultsViewController(categoryId: category.category_id), animated: true)
+        let productResultsVC = ProductResultsViewController(categoryId: category.categoryId)
+        navigationController?.pushViewController(productResultsVC, animated: true)
     }
 }

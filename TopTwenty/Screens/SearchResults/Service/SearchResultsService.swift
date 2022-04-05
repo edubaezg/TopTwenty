@@ -1,13 +1,18 @@
 import Foundation
 import Alamofire
 
+// MARK: - CategoryError
 enum CategoryError: Error {
     case emptyCategory
 }
 
+// MARK: - SearchResultsService
 class SearchResultsService {
+    // MARK: - Properties
     static let basePath = Paths.basePath.rawValue
+    static let limitSearch = "8"
     
+    // MARK: - Get a list of categories by a search text
     static func getCategoryPreditor(search: String, completion: @escaping (Result<[CategoryModel], CategoryError>) -> Void) {
         let url = "\(basePath)\(Paths.searchPreditor.rawValue)"
         AF.request(url, parameters: getParameters(search: search), encoding: URLEncoding.default).response {
@@ -26,6 +31,6 @@ class SearchResultsService {
     }
     
     static func getParameters(search: String) -> Parameters {
-        ["limit": "8", "q": search]
+        ["limit": limitSearch, "q": search]
     }
 }
