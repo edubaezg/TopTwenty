@@ -1,17 +1,23 @@
 import UIKit
 
+// MARK: - Protocol
 protocol SearchResultsDelegate: AnyObject {
     func goToProductResults(category: CategoryModel)
 }
 
+// MARK: SearchResultsViewController
 class SearchResultsViewController: UIViewController {
     
+    // MARK: Properties
     let cellIdentifier = "SearchResultViewCell"
     let searchResultsTableView = UITableView()
     let searchResultsViewModel = SearchResultsViewModel()
     var categories = [CategoryModel]()
     weak var delegate: SearchResultsDelegate?
-    
+}
+
+// MARK: - Inits
+extension SearchResultsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -29,6 +35,7 @@ extension SearchResultsViewController {
     }
     
     func style() {
+        // SearchResultsTableView
         searchResultsTableView.translatesAutoresizingMaskIntoConstraints = false
         searchResultsTableView.separatorStyle = .none
     }
@@ -36,6 +43,7 @@ extension SearchResultsViewController {
     func layout() {
         view.addSubview(searchResultsTableView)
         
+        // SearchResultsTableView
         NSLayoutConstraint.activate([
             searchResultsTableView.topAnchor.constraint(equalTo: view.topAnchor),
             searchResultsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -55,7 +63,9 @@ extension SearchResultsViewController: UITableViewDelegate, UITableViewDataSourc
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? SearchResultViewCell else {
             return UITableViewCell()
         }
+        
         cell.setup(category: categories[indexPath.row])
+        
         return cell
     }
     

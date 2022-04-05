@@ -1,8 +1,8 @@
 import Foundation
 import Alamofire
 
+// MARK: - HomeService
 class HomeService {
-    
     static let basePath = Paths.basePath.rawValue
     
     static func getAccessToken(completion: @escaping (Result<String, HttpError>) -> Void) {
@@ -18,7 +18,7 @@ class HomeService {
                 switch status {
                 case StatucCodes.OK.rawValue:
                     let loginResponse = try JSONDecoder().decode(LoginResponseModel.self, from: data)
-                    completion(.success(loginResponse.access_token))
+                    completion(.success(loginResponse.accessToken))
                 case StatucCodes.BAD_REQUEST.rawValue:
                     completion(.failure(.badRequest))
                 default:
@@ -32,11 +32,11 @@ class HomeService {
     
     static func getParams() -> Parameters {
         let params : Parameters = [
-            "grant_type": "authorization_code",
-            "client_id": "917558775959455",
-            "client_secret": "tYlWPS728XrVRkyGz9PYAyo7cU2QaFe3",
-            "code": "TG-62474bc60d0811001a2613d0-9754121",
-            "redirect_uri": "https://google.com"
+            "grant_type": AuthConfig.grantType.rawValue,
+            "client_id": AuthConfig.clientId.rawValue,
+            "client_secret": AuthConfig.clientSecret.rawValue,
+            "code": AuthConfig.code.rawValue,
+            "redirect_uri": AuthConfig.redirectUri.rawValue
         ]
         
         return params

@@ -31,7 +31,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="428" height="1193"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="YMe-Ve-cat">
-                                    <rect key="frame" x="16" y="20" width="396" height="788.33333333333337"/>
+                                    <rect key="frame" x="16" y="20" width="396" height="522.66666666666663"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="tRf-cN-TL7" userLabel="Info Stack View">
                                             <rect key="frame" x="0.0" y="0.0" width="396" height="58"/>
@@ -56,7 +56,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XgJ-Qw-eIM">
                                                     <rect key="frame" x="0.0" y="0.0" width="396" height="320"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="white"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" name="background"/>
@@ -85,17 +85,17 @@
                                                 <action selector="toggleFavoriteTapped:" destination="-1" eventType="touchUpInside" id="rrE-LP-xMF"/>
                                             </connections>
                                         </button>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hRE-IZ-HWU">
-                                            <rect key="frame" x="0.0" y="546.66666666666663" width="396" height="241.66666666666663"/>
+                                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hRE-IZ-HWU">
+                                            <rect key="frame" x="0.0" y="522.66666666666663" width="396" height="10"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0J9-RY-Zph">
-                                                    <rect key="frame" x="0.0" y="0.0" width="396" height="19"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="396" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcK-3A-V9V">
-                                                    <rect key="frame" x="0.0" y="28.999999999999986" width="396" height="212.66666666666663"/>
+                                                    <rect key="frame" x="0.0" y="10" width="396" height="0.0"/>
                                                     <attributedString key="attributedText">
                                                         <fragment>
                                                             <string key="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>

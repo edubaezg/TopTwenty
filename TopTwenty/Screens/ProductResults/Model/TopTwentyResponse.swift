@@ -1,5 +1,12 @@
 import Foundation
 
+// MARK: - Protocols
+protocol Itemeable {
+    var id: String { get }
+    var position: Int { get }
+    var type: String { get }
+}
+
 // MARK: - TopTwentyResponse
 struct TopTwentyResponse: Codable {
     let topTwentyItems: [TopTwentyItem]
@@ -10,7 +17,7 @@ struct TopTwentyResponse: Codable {
 }
 
 // MARK: - TopTwentyItem
-struct TopTwentyItem: Codable {
+struct TopTwentyItem: Itemeable, Codable {
     let id: String
     let position: Int
     let type: String
