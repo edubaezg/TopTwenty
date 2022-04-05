@@ -31,6 +31,7 @@ extension ProductResultViewCell {
         priceLabel.text = String("$ \(product.price)")
         descriptionLabel.text = "Vendido por Nintendo"
         thumbnailImageView.loadFrom(URLAddress: product.thumbnail)
+        descriptionLabel.text = product.condition == "new" ? "Producto Nuevo" : "Producto Usado"
         isFavorite = product.isFavorite ?? false
         setFavoriteButtonView(isFavorite: isFavorite)
         

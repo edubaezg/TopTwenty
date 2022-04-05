@@ -22,6 +22,7 @@ struct Product: Productable, Codable {
     let warranty: String?
     let price: Double
     let pictures: [Picture]
+    let condition: String?
     var isFavorite: Bool?
 }
 
